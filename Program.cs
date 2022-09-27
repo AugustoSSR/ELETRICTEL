@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using ELETRICTEL.Data;
+using ELETRICTEL.Services;
+
 namespace ELETRICTEL
 {
     public class Program
@@ -13,6 +15,8 @@ namespace ELETRICTEL
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddScoped<TypesService>();
 
             var app = builder.Build();
 

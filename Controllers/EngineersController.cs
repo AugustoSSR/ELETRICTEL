@@ -10,85 +10,85 @@ using ELETRICTEL.Models;
 
 namespace ELETRICTEL.Controllers
 {
-    public class ProjectsController : Controller
+    public class EngineersController : Controller
     {
         private readonly ELETRICTELContext _context;
 
-        public ProjectsController(ELETRICTELContext context)
+        public EngineersController(ELETRICTELContext context)
         {
             _context = context;
         }
 
-        // GET: Projects
+        // GET: Engineers
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Projects.ToListAsync());
+              return View(await _context.Engineers.ToListAsync());
         }
 
-        // GET: Projects/Details/5
+        // GET: Engineers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Projects == null)
+            if (id == null || _context.Engineers == null)
             {
                 return NotFound();
             }
 
-            var projects = await _context.Projects
+            var engineers = await _context.Engineers
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (projects == null)
+            if (engineers == null)
             {
                 return NotFound();
             }
 
-            return View(projects);
+            return View(engineers);
         }
 
-        // GET: Projects/Create
+        // GET: Engineers/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Projects/Create
+        // POST: Engineers/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Projects projects)
+        public async Task<IActionResult> Create([Bind("Id,Name,CREA,Mail,Phone,CPF,RG,CreateTime,ChangeTime")] Engineers engineers)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(projects);
+                _context.Add(engineers);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(projects);
+            return View(engineers);
         }
 
-        // GET: Projects/Edit/5
+        // GET: Engineers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Projects == null)
+            if (id == null || _context.Engineers == null)
             {
                 return NotFound();
             }
 
-            var projects = await _context.Projects.FindAsync(id);
-            if (projects == null)
+            var engineers = await _context.Engineers.FindAsync(id);
+            if (engineers == null)
             {
                 return NotFound();
             }
-            return View(projects);
+            return View(engineers);
         }
 
-        // POST: Projects/Edit/5
+        // POST: Engineers/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Projects projects)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,CREA,Mail,Phone,CPF,RG,CreateTime,ChangeTime")] Engineers engineers)
         {
-            if (id != projects.Id)
+            if (id != engineers.Id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace ELETRICTEL.Controllers
             {
                 try
                 {
-                    _context.Update(projects);
+                    _context.Update(engineers);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProjectsExists(projects.Id))
+                    if (!EngineersExists(engineers.Id))
                     {
                         return NotFound();
                     }
@@ -113,49 +113,49 @@ namespace ELETRICTEL.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(projects);
+            return View(engineers);
         }
 
-        // GET: Projects/Delete/5
+        // GET: Engineers/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Projects == null)
+            if (id == null || _context.Engineers == null)
             {
                 return NotFound();
             }
 
-            var projects = await _context.Projects
+            var engineers = await _context.Engineers
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (projects == null)
+            if (engineers == null)
             {
                 return NotFound();
             }
 
-            return View(projects);
+            return View(engineers);
         }
 
-        // POST: Projects/Delete/5
+        // POST: Engineers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Projects == null)
+            if (_context.Engineers == null)
             {
-                return Problem("Entity set 'ELETRICTELContext.Projects'  is null.");
+                return Problem("Entity set 'ELETRICTELContext.Engineers'  is null.");
             }
-            var projects = await _context.Projects.FindAsync(id);
-            if (projects != null)
+            var engineers = await _context.Engineers.FindAsync(id);
+            if (engineers != null)
             {
-                _context.Projects.Remove(projects);
+                _context.Engineers.Remove(engineers);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ProjectsExists(int id)
+        private bool EngineersExists(int id)
         {
-          return _context.Projects.Any(e => e.Id == id);
+          return _context.Engineers.Any(e => e.Id == id);
         }
     }
 }

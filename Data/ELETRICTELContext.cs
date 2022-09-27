@@ -14,6 +14,9 @@ namespace ELETRICTEL.Data
         {
         }
 
-        public DbSet<ELETRICTEL.Models.Projects> Projects { get; set; } = default!;
+        public DbSet<Projects> Projects { get; set; } = default!;
+        public DbSet<Types> Types { get; set; } = default!;
+        public DbSet<ELETRICTEL.Models.Engineers> Engineers { get; set; }
+        public DbSet<ELETRICTEL.Models.RCommercial> RCommercial { get; set; }
     }
 }
