@@ -4,63 +4,111 @@
     ViewData["Title"] = "Login";
 }
 
-<div class="text-center">
-
-    <br />
-    @if (TempData["MensagemSucesso"] != null)
-    {
-        <div class="alert alert-dismissible alert-success">
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            <strong>Parabéns! </strong> @TempData["MensagemSucesso"].
-        </div>
-    }
-    <br />
-    @if (TempData["MensagemErro"] != null)
-    {
-        <div class="alert alert-dismissible alert-warning">
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            <h4 class="alert-heading">Atenção!</h4>
-            <p class="mb-0"><strong>Oh snap!</strong> @TempData["MensagemErro"]. </p>
-        </div>
-    }
-
-    <main class="form-signin w-150 m-auto">
-        <form asp-controller="Login" asp-action="Entrar" method="post">
-            <img class="mb-4" src="~/img/logo.png" alt="" width="100" height="100">
-            <h1 class="h3 mb-3 fw-normal">Faça o seu login</h1>
-
-            <div class="form-floating">
-                <input type="text" asp-for="LoginUser" class="form-control" id="login" placeholder="Username">
-                <label for="login">Username</label>
-                @Html.ValidationMessageFor(x => x.LoginUser)
-            </div>
-            <div class="form-floating">
-                <input type="password" asp-for="LoginPassword" class="form-control" id="senha" placeholder="Password">
-                <label for="senha">Password</label>
-                @Html.ValidationMessageFor(x => x.LoginPassword)
-            </div>
-
-            <div class="checkbox mb-3">
-                <label>
-                    <input type="checkbox" value="remember-me"> Lembrar-se
-                </label>
-            </div>
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Logar</button>
-            <br />
-            <p class="mx-auto">
-                Esqueceu sua senha ?
-                <a asp-controller="Login" asp-action="RedefinirSenha" class="mb-3 fw-normal"> Esqueci</a>
-            </p>
-        </form>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <div class="container">
-            &copy; 2022 - B Solutions
-        </div>
-    </main>
+<!-- GLOABAL LOADER -->
+<div id="global-loader">
+    <img src="~/images/loader.svg" class="loader-img" alt="Loader">
 </div>
+<!-- /GLOABAL LOADER -->
+<!-- PAGE -->
+<div class="page">
+    <div class="">
 
+        <!-- CONTAINER OPEN -->
+        <div class="col col-login mx-auto mt-7">
+            <div class="text-center">
+                <a href="index.html"><img src="~/images/brand/logo-white.png" class="header-brand-img" alt=""></a>
+            </div>
+        </div>
+
+        <div class="container-login100">
+            <div class="wrap-login100 p-6">
+                <form asp-controller="Login" asp-action="Entrar" class="login100-form validate-form" method="post">
+                    <span class="login100-form-title pb-5">
+                        Login
+                    </span>
+                    <div class="panel panel-primary">
+                        <div class="tab-menu-heading">
+                            <div class="tabs-menu1">
+                                <!-- Tabs -->
+                                <ul class="nav panel-tabs">
+                                    <li class="mx-0"><a href="#tab5" class="active" data-bs-toggle="tab">Email</a></li>
+                                    <li class="mx-0"><a href="#tab6" data-bs-toggle="tab">Mobile</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="panel-body tabs-menu-body p-0 pt-5">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="tab5">
+                                    <div class="wrap-input100 validate-input input-group" data-bs-validate="Valid email is required: ex@abc.xyz">
+                                        <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
+                                            <i class="zmdi zmdi-email text-muted" aria-hidden="true"></i>
+                                        </a>
+                                        <input class="input100 border-start-0 form-control ms-0" asp-for="LoginUser" type="text" placeholder="Username">
+                                        @Html.ValidationMessageFor(x => x.LoginUser)
+                                    </div>
+                                    <div class="wrap-input100 validate-input input-group" id="Password-toggle">
+                                        <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
+                                            <i class="zmdi zmdi-eye text-muted" aria-hidden="true"></i>
+                                        </a>
+                                        <input class="input100 border-start-0 form-control ms-0" asp-for="LoginPassword" type="password" placeholder="Password">
+                                        @Html.ValidationMessageFor(x => x.LoginPassword)
+                                    </div>
+                                    <div class="text-end pt-4">
+                                        <p class="mb-0"><a href="forgot-password.html" class="text-primary ms-1">Forgot Password?</a></p>
+                                    </div>
+                                    <div class="container-login100-form-btn">
+                                        <button type="submit" class="login100-form-btn btn-primary">Login</button>
+                                    </div>
+                                    <div class="text-center pt-3">
+                                        <p class="text-dark mb-0">Not a member?<a href="register.html" class="text-primary ms-1">Sign UP</a></p>
+                                    </div>
+                                    <label class="login-social-icon"><span>Login with Social</span></label>
+                                    <div class="d-flex justify-content-center">
+                                        <a href="javascript:void(0)">
+                                            <div class="social-login me-4 text-center">
+                                                <i class="fa fa-google"></i>
+                                            </div>
+                                        </a>
+                                        <a href="javascript:void(0)">
+                                            <div class="social-login me-4 text-center">
+                                                <i class="fa fa-facebook"></i>
+                                            </div>
+                                        </a>
+                                        <a href="javascript:void(0)">
+                                            <div class="social-login text-center">
+                                                <i class="fa fa-twitter"></i>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab6">
+                                    <div id="mobile-num" class="wrap-input100 validate-input input-group mb-4">
+                                        <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
+                                            <span>+91</span>
+                                        </a>
+                                        <input class="input100 border-start-0 form-control ms-0">
+                                    </div>
+                                    <div id="login-otp" class="justify-content-around mb-5">
+                                        <input class="form-control text-center w-15" id="txt1" maxlength="1">
+                                        <input class="form-control text-center w-15" id="txt2" maxlength="1">
+                                        <input class="form-control text-center w-15" id="txt3" maxlength="1">
+                                        <input class="form-control text-center w-15" id="txt4" maxlength="1">
+                                    </div>
+                                    <span>Note : Login with registered mobile number to generate OTP.</span>
+                                    <div class="container-login100-form-btn ">
+                                        <a href="javascript:void(0)" class="login100-form-btn btn-primary" id="generate-otp">
+                                            Proceed
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <!-- CONTAINER CLOSED -->
+    </div>
+</div>
+<!-- End PAGE -->

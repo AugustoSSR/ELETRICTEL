@@ -4,29 +4,54 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - B Solutions</title>
-    <link rel="stylesheet" href="https://bootswatch.com/5/litera/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/signin.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/B_Solutions.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css" />
+    
+    <!-- BOOTSTRAP CSS -->
+    <link id="style" href="~/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- STYLE CSS -->
+    <link href="~/css/style.css" rel="stylesheet" />
+    <link href="~/css/dark-style.css" rel="stylesheet" />
+    <link href="~/css/transparent-style.css" rel="stylesheet">
+    <link href="~/css/skin-modes.css" rel="stylesheet" />
+
+    <!--- FONT-ICONS CSS -->
+    <link href="~/css/icons.css" rel="stylesheet" />
+
+    <!-- COLOR SKIN CSS -->
+    <link id="theme" rel="stylesheet" type="text/css" media="all" href="~/colors/color1.css" />
 
 
 </head>
-<body>
-    <header>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+<body class="app sidebar-mini ltr login-img">
+    <div class="">
+        @await Html.PartialAsync("_Notifications.cshtml")
+        @RenderBody()
     </div>
 
     <footer class="border-top footer text-muted">
-        
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
+    <!-- BACKGROUND-IMAGE CLOSED -->
+    <!-- JQUERY JS -->
+    <script src="~/js/jquery.min.js"></script>
+
+    <!-- BOOTSTRAP JS -->
+    <script src="~/plugins/bootstrap/js/popper.min.js"></script>
+    <script src="~/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- SHOW PASSWORD JS -->
+    <script src="~/js/show-password.min.js"></script>
+
+    <!-- GENERATE OTP JS -->
+    <script src="~/js/generate-otp.js"></script>
+
+    <!-- Perfect SCROLLBAR JS-->
+    <script src="~/plugins/p-scroll/perfect-scrollbar.js"></script>
+
+    <!-- Color Theme js -->
+    <script src="~/js/themeColors.js"></script>
+
+    <!-- CUSTOM JS -->
+    <script src="~/js/custom.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
