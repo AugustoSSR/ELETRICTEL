@@ -1,0 +1,50 @@
+﻿@model ELETRICTEL.Models.ViewModels.ResetViewModel
+@{
+    Layout = "_LayoutDeslogado";
+    ViewData["Title"] = "Redefinir Senha";
+}
+
+<div class="text-center">
+
+    <br />
+    @if (TempData["MensagemSucesso"] != null)
+    {
+        <div class="alert alert-dismissible alert-success">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <strong>Parabéns! </strong> @TempData["MensagemSucesso"].
+        </div>
+    } 
+    <br />
+    @if (TempData["MensagemErro"] != null)
+    {
+        <div class="alert alert-dismissible alert-warning">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <h4 class="alert-heading">Atenção!</h4>
+            <p class="mb-0"><strong>Oh snap!</strong> @TempData["MensagemErro"]. </p>
+        </div>
+    }
+
+    <main class="form-signin w-100 m-auto">
+        <form asp-controller="Login" asp-action="EnviarLink" method="post">
+            <img class="mb-4" src="~/img/brand/blue.png" alt="" width="180" height="57">
+            <h1 class="h3 mb-3 fw-normal">Redefinir senha.</h1>
+
+            <div class="form-floating">
+                <input type="text" asp-for="ResetLogin" class="form-control" id="login" placeholder="Username">
+                <label for="login">Username</label>
+                @Html.ValidationMessageFor(x => x.ResetLogin)
+            </div>
+            <div class="form-floating">
+                <input type="text" asp-for="ResetMail" class="form-control" id="email" placeholder="E-mail">
+                <label for="email">E-mail</label>
+                @Html.ValidationMessageFor(x => x.ResetMail)
+            </div>
+            <br />
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Redefinir</button>
+            <br />
+            <br />
+            <a class="w-100 btn btn-lg btn-danger" asp-controller="Login" asp-action="Index" role="button">Voltar</a>
+        </form>
+    </main>
+</div>
+

@@ -1,0 +1,83 @@
+﻿@model IEnumerable<ELETRICTEL.Models.ViewModels.UsersViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UsersName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UsersLogin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UsersPassword)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UsersMail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UsersPhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Roles)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Actived)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChangeTime)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UsersName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UsersLogin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UsersPassword)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UsersMail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UsersPhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Roles.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Actived)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChangeTime)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

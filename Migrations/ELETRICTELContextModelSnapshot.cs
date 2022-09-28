@@ -223,6 +223,31 @@ namespace ELETRICTEL.Migrations
                     b.ToTable("RCommercial");
                 });
 
+            modelBuilder.Entity("ELETRICTEL.Models.Roles", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ChangeTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
+                });
+
             modelBuilder.Entity("ELETRICTEL.Models.RResponsible", b =>
                 {
                     b.Property<int>("Id")
@@ -317,6 +342,56 @@ namespace ELETRICTEL.Migrations
                     b.ToTable("UserClients");
                 });
 
+            modelBuilder.Entity("ELETRICTEL.Models.ViewModels.UsersViewModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("Actived")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ChangeTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("RolesId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<string>("UsersLogin")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("UsersMail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UsersName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UsersPassword")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("UsersPhone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RolesId");
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("ELETRICTEL.Models.Company", b =>
                 {
                     b.HasOne("ELETRICTEL.Models.UserClients", "UserClients")
@@ -371,6 +446,17 @@ namespace ELETRICTEL.Migrations
                     b.Navigation("Types");
                 });
 
+            modelBuilder.Entity("ELETRICTEL.Models.ViewModels.UsersViewModel", b =>
+                {
+                    b.HasOne("ELETRICTEL.Models.Roles", "Roles")
+                        .WithMany("UserViewModel")
+                        .HasForeignKey("RolesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Roles");
+                });
+
             modelBuilder.Entity("ELETRICTEL.Models.Company", b =>
                 {
                     b.Navigation("Projects");
@@ -384,6 +470,11 @@ namespace ELETRICTEL.Migrations
             modelBuilder.Entity("ELETRICTEL.Models.RCommercial", b =>
                 {
                     b.Navigation("Projects");
+                });
+
+            modelBuilder.Entity("ELETRICTEL.Models.Roles", b =>
+                {
+                    b.Navigation("UserViewModel");
                 });
 
             modelBuilder.Entity("ELETRICTEL.Models.RResponsible", b =>

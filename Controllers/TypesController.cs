@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ELETRICTEL.Data;
 using ELETRICTEL.Models;
+using ELETRICTEL.Filters;
 
 namespace ELETRICTEL.Controllers
 {
+    [PaginaParaUsuarioLogado]
     public class TypesController : Controller
     {
         private readonly ELETRICTELContext _context;

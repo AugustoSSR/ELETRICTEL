@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using ELETRICTEL.Data;
 using ELETRICTEL.Services;
+using ELETRICTEL.Helper;
+using ELETRICTEL.Repository;
 
 namespace ELETRICTEL
 {
@@ -10,13 +11,23 @@ namespace ELETRICTEL
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            // Add services to the container.
+            builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<ELETRICTELContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("ELETRICTELContext") ?? throw new InvalidOperationException("Connection string 'ELETRICTELContext' not found.")));
 
-            // Add services to the container.
-            builder.Services.AddControllersWithViews();
 
             builder.Services.AddScoped<TypesService>();
+
+            builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            builder.Services.AddScoped<IUsersRepository, UsersRepository>();
+            builder.Services.AddScoped<ISessao, Sessao>();
+            builder.Services.AddScoped<IEmail, Email>();
+            builder.Services.AddSession(o =>
+            {
+                o.Cookie.HttpOnly = true;
+                o.Cookie.IsEssential = true;
+            });
 
             var app = builder.Build();
 
@@ -34,10 +45,11 @@ namespace ELETRICTEL
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseSession();
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Login}/{action=Index}/{id?}");
 
             app.Run();
         }

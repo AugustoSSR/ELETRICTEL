@@ -1,0 +1,86 @@
+﻿@model IEnumerable<ELETRICTEL.Models.Projects>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="text-center">
+    <h1>Index</h1>
+</div>
+
+
+<p>
+    <a class="btn btn-success" asp-action="Create"><i class="bi bi-pencil-square"></i> &nbsp;Adicionar</a>
+</p>
+<div class="text-center">
+    <table class="table table-striped table-hover" id="projetosTable">
+        <thead>
+            <tr>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Types)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Company)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Location)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Protocol)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.ApprovedTime)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.CreateTime)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td scope="row">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Types.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Company.Razao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Location)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Protocol)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ApprovedTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreateTime)
+                    </td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a role="button" class="btn btn-light" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-gear"></i> &nbsp;Editar</a>
+                            <a role="button" class="btn btn-warning" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-journal-code"></i> &nbsp;Detalhes</a>
+                            <a role="button" class="btn btn-warning" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash3"></i> &nbsp;Apagar</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

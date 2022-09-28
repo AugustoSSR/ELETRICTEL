@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using ELETRICTEL.Models;
+using ELETRICTEL.Models.ViewModels;
 
 namespace ELETRICTEL.Data
 {
@@ -16,7 +13,12 @@ namespace ELETRICTEL.Data
 
         public DbSet<Projects> Projects { get; set; } = default!;
         public DbSet<Types> Types { get; set; } = default!;
-        public DbSet<ELETRICTEL.Models.Engineers> Engineers { get; set; }
-        public DbSet<ELETRICTEL.Models.RCommercial> RCommercial { get; set; }
+        public DbSet<Engineers> Engineers { get; set; }
+        public DbSet<RCommercial> RCommercial { get; set; }
+        public DbSet<Status> Status { get; set; }
+        public DbSet<Company> Company { get; set; }
+        public DbSet<RResponsible> RResponsible { get; set; }
+        public DbSet<UsersViewModel> Users { get; set; }
+        public DbSet<ELETRICTEL.Models.Roles> Roles { get; set; }
     }
 }
