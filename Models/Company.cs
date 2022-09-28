@@ -34,7 +34,7 @@ namespace ELETRICTEL.Models
         [DisplayName("Usuario")]
         [Required(ErrorMessage = "Por favor selecione o usuario do cliente.")]
         public int? UserClientsId { get; set; }
-        public UserClients UserClients { get; set; }
+        public UserClients? UserClients { get; set; }
         public ICollection<Projects> Projects { get; set; } = new List<Projects>();
         [DisplayName("Data de Cadastro")]
         public DateTime CreateTime { get; set; }
