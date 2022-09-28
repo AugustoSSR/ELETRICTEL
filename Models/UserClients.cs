@@ -1,4 +1,5 @@
-﻿namespace ELETRICTEL.Models
+﻿
+namespace ELETRICTEL.Models
 {
     public class UserClients
     {

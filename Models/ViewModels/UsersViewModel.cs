@@ -55,6 +55,5 @@ namespace ELETRICTEL.Models.ViewModels
             UsersPassword = novaSenha.GerarHash();
             return novaSenha;
         }
-
     }
 }
