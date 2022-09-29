@@ -4,6 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - ELETRICTEL</title>
+    <!-- FAVICON -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico" />
 
     <!-- CSS BOOTSTRAOP -->
     <link id="style" href="~/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -47,11 +49,18 @@
         </div>
     </div>
 
-    <footer class="border-top footer text-muted">
+
+    <!-- FOOTER -->
+    <footer class="footer">
         <div class="container">
-            &copy; 2022 - ELETRICTEL - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="row align-items-center flex-row-reverse">
+                <div class="col-md-12 col-sm-12 text-center">
+                    Copyright © <span id="year"></span> <a href="javascript:void(0)">ELETRICTEL</a>. Designed with <span class="fa fa-heart text-danger"></span> by <a href="javascript:void(0)"> Augusto </a> All rights reserved.
+                </div>
+            </div>
         </div>
     </footer>
+    <!-- FOOTER END -->
 
     <!-- BACK-TO-TOP -->
     <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>

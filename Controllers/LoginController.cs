@@ -25,12 +25,12 @@ namespace ELETRICTEL.Controllers
             return View();
         }
 
-        public IActionResult RedefinirSenha()
+        public IActionResult ResetPassword()
         {
             return View();
         }
 
-        public IActionResult Sair()
+        public IActionResult Logout()
         {
             TempData["MensagemSucesso"] = "Você deslogou ou foi descontado, digite novamente seu usuario e senha.";
             _sessao.removerSessaoUsuario();
@@ -38,7 +38,7 @@ namespace ELETRICTEL.Controllers
         }
 
         [HttpPost]
-        public IActionResult Entrar(LoginViewModel loginModel)
+        public IActionResult Login(LoginViewModel loginModel)
         {
             try
             {
