@@ -56,11 +56,11 @@ namespace ELETRICTEL.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,CreateTime,ChangeTime")] Types types)
+        public async Task<IActionResult> Create([Bind("Id,Name")] Types types)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(types);
+                _context.Types.Add(types);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -88,7 +88,7 @@ namespace ELETRICTEL.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,CreateTime,ChangeTime")] Types types)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Types types)
         {
             if (id != types.Id)
             {
@@ -99,7 +99,8 @@ namespace ELETRICTEL.Controllers
             {
                 try
                 {
-                    _context.Update(types);
+                    types.ChangeTime = DateTime.Now;
+                    _context.Types.Update(types);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
