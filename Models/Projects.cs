@@ -45,9 +45,9 @@ namespace ELETRICTEL.Models
         public DateTime? ApprovedTime { get; set; }
 
 
-        [DisplayName("Data de Criação")]
-        public DateTime? CreateTime { get; set; }
-        [DisplayName("Data de Alteração")]
+        [DisplayName("Create Date")]
+        public DateTime CreateTime { get; set; }
+        [DisplayName("Change Date")]
         public DateTime? ChangeTime { get; set; }
 
         public Projects()

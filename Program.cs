@@ -3,6 +3,8 @@ using ELETRICTEL.Data;
 using ELETRICTEL.Services;
 using ELETRICTEL.Helper;
 using ELETRICTEL.Repository;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 
 namespace ELETRICTEL
 {
@@ -43,6 +45,14 @@ namespace ELETRICTEL
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            var supportedCultures = new[] { new CultureInfo("pt-BR") };
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("pt-BR"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            });
 
             app.UseAuthorization();
             app.UseSession();

@@ -21,8 +21,6 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Lista de projetos</h3>
-
                 <a class="btn btn-success text-lg-end" asp-action="Create"><i class="bi bi-pencil-square"></i> &nbsp;Adicionar</a>
             </div>
             <div class="card-body">
@@ -53,7 +51,7 @@
                                         @Html.DisplayFor(modelItem => item.CreateTime)
                                     </td>
                                     <td>
-                                        @Html.DisplayNameFor(model => model.ChangeTime)
+                                        @Html.DisplayFor(modelItem => item.ChangeTime)
                                     </td>
                                     <td>
                                         <div class="btn-group" role="group">

@@ -1,5 +1,6 @@
 ﻿
 using ELETRICTEL.Models.ViewModels;
+using System.ComponentModel;
 
 namespace ELETRICTEL.Models
 {
@@ -9,7 +10,9 @@ namespace ELETRICTEL.Models
         public string Name { get; set; }
         public bool Active { get; set; }
         public ICollection<UsersViewModel> UserViewModel { get; set; } = new List<UsersViewModel>();
+        [DisplayName("Create Date")]
         public DateTime CreateTime { get; set; }
+        [DisplayName("Change Date")]
         public DateTime? ChangeTime { get; set; }
 
 

@@ -1,4 +1,6 @@
-﻿namespace ELETRICTEL.Models
+﻿using System.ComponentModel;
+
+namespace ELETRICTEL.Models
 {
     public class RResponsible
     {
@@ -10,7 +12,9 @@
         public string CPF { get; set; }
         public string RG { get; set; }
         public ICollection<Projects> Projects { get; set; } = new List<Projects>();
+        [DisplayName("Create Date")]
         public DateTime CreateTime { get; set; }
+        [DisplayName("Change Date")]
         public DateTime? ChangeTime { get; set; }
     }
 }
