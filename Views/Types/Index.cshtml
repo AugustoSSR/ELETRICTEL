@@ -3,45 +3,91 @@
 @{
     ViewData["Title"] = "Index";
 }
+<!-- PAGE-HEADER -->
+<div class="page-header">
+    <h1 class="page-title">Data Table</h1>
+    <div>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Tables</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Data Table</li>
+        </ol>
+    </div>
 
-<h1>Index</h1>
+</div>
+<!-- PAGE-HEADER END -->
+<!-- Row -->
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table" id="tiposTable">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreateTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ChangeTime)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreateTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ChangeTime)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+<div class="row row-sm">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Lista de projetos</h3>
+
+                <a class="btn btn-success text-lg-end" asp-action="Create"><i class="bi bi-pencil-square"></i> &nbsp;Adicionar</a>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="file-datatable" class="table table-bordered text-nowrap key-buttons border-bottom">
+                        <thead>
+                            <tr>
+                                <th scope="border-bottom-0">
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </th>
+                                <th scope="border-bottom-0">
+                                    @Html.DisplayNameFor(model => model.CreateTime)
+                                </th>
+                                <th scope="border-bottom-0">
+                                    @Html.DisplayNameFor(model => model.ChangeTime)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CreateTime)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.ChangeTime)
+                                    </td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <a role="button" class="btn btn-light" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-gear"></i> &nbsp;Editar</a>
+                                            <a role="button" class="btn btn-warning" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-journal-code"></i> &nbsp;Detalhes</a>
+                                            <a role="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash3"></i> &nbsp;Apagar</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Row -->
+@section Scripts {
+    <!-- DATA TABLE JS-->
+    <script src="~/plugins/datatable/js/jquery.dataTables.min.js"></script>
+    <script src="~/plugins/datatable/js/dataTables.bootstrap5.js"></script>
+    <script src="~/plugins/datatable/js/dataTables.buttons.min.js"></script>
+    <script src="~/plugins/datatable/js/buttons.bootstrap5.min.js"></script>
+    <script src="~/plugins/datatable/js/jszip.min.js"></script>
+    <script src="~/plugins/datatable/pdfmake/pdfmake.min.js"></script>
+    <script src="~/plugins/datatable/pdfmake/vfs_fonts.js"></script>
+    <script src="~/plugins/datatable/js/buttons.html5.min.js"></script>
+    <script src="~/plugins/datatable/js/buttons.print.min.js"></script>
+    <script src="~/plugins/datatable/js/buttons.colVis.min.js"></script>
+    <script src="~/plugins/datatable/dataTables.responsive.min.js"></script>
+    <script src="~/plugins/datatable/responsive.bootstrap5.min.js"></script>
+    <script src="~/js/table-data.js"></script>
+    <script src="~/js/modelSites.js"></script>
+
 }
-    </tbody>
-</table>
+
