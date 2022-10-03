@@ -7,13 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ELETRICTEL.Data;
 using ELETRICTEL.Models;
-using ELETRICTEL.Filters;
 
 namespace ELETRICTEL.Controllers
 {
-    [PaginaParaUsuarioLogado]
     public class ProjectsController : Controller
     {
+
         private readonly ELETRICTELContext _context;
 
         public ProjectsController(ELETRICTELContext context)
@@ -24,7 +23,7 @@ namespace ELETRICTEL.Controllers
         // GET: Projects
         public async Task<IActionResult> Index()
         {
-            var eLETRICTELContext = _context.Projects.Include(p => p.Company).Include(p => p.RCommercial).Include(p => p.RResponsible).Include(p => p.Status).Include(p => p.Types).Include(p => p.Engineers);
+            var eLETRICTELContext = _context.Projects.Include(p => p.Company).Include(p => p.Status).Include(p => p.Types);
             return View(await eLETRICTELContext.ToListAsync());
         }
 
@@ -38,11 +37,8 @@ namespace ELETRICTEL.Controllers
 
             var projects = await _context.Projects
                 .Include(p => p.Company)
-                .Include(p => p.RCommercial)
-                .Include(p => p.RResponsible)
                 .Include(p => p.Status)
                 .Include(p => p.Types)
-                .Include(p => p.Engineers)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (projects == null)
             {
@@ -56,11 +52,8 @@ namespace ELETRICTEL.Controllers
         public IActionResult Create()
         {
             ViewData["CompanyId"] = new SelectList(_context.Company, "Id", "Razao");
-            ViewData["RCommercialId"] = new SelectList(_context.RCommercial, "Id", "Name");
-            ViewData["RResponsibleId"] = new SelectList(_context.RResponsible, "Id", "Name");
             ViewData["StatusId"] = new SelectList(_context.Status, "Id", "Name");
             ViewData["TypesId"] = new SelectList(_context.Types, "Id", "Name");
-            ViewData["EngineersId"] = new SelectList(_context.Types, "Id", "Name");
             return View();
         }
 
@@ -69,7 +62,7 @@ namespace ELETRICTEL.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,TypesId,StatusId,CompanyId,Location,ProjectKM,ProjectPostes,ProjectART,ProjectStreetART,EngineersId,RCommercialId,RResponsibleId,Protocol,ProtocolTime,ApprovedTime,CreateTime,ChangeTime")] Projects projects)
+        public async Task<IActionResult> Create([Bind("Id,Name,TypesId,StatusId,CompanyId,Location")] Projects projects)
         {
             if (ModelState.IsValid)
             {
@@ -79,11 +72,8 @@ namespace ELETRICTEL.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CompanyId"] = new SelectList(_context.Company, "Id", "Razao", projects.CompanyId);
-            ViewData["RCommercialId"] = new SelectList(_context.RCommercial, "Id", "Name", projects.RCommercialId);
-            ViewData["RResponsibleId"] = new SelectList(_context.RResponsible, "Id", "Name", projects.RResponsibleId);
             ViewData["StatusId"] = new SelectList(_context.Status, "Id", "Name", projects.StatusId);
             ViewData["TypesId"] = new SelectList(_context.Types, "Id", "Name", projects.TypesId);
-            ViewData["EngineersId"] = new SelectList(_context.Types, "Id", "Name", projects.TypesId);
             return View(projects);
         }
 
@@ -101,11 +91,8 @@ namespace ELETRICTEL.Controllers
                 return NotFound();
             }
             ViewData["CompanyId"] = new SelectList(_context.Company, "Id", "Razao", projects.CompanyId);
-            ViewData["RCommercialId"] = new SelectList(_context.RCommercial, "Id", "Name", projects.RCommercialId);
-            ViewData["RResponsibleId"] = new SelectList(_context.RResponsible, "Id", "Name", projects.RResponsibleId);
             ViewData["StatusId"] = new SelectList(_context.Status, "Id", "Name", projects.StatusId);
             ViewData["TypesId"] = new SelectList(_context.Types, "Id", "Name", projects.TypesId);
-            ViewData["EngineersId"] = new SelectList(_context.Types, "Id", "Name", projects.TypesId);
             return View(projects);
         }
 
@@ -114,7 +101,7 @@ namespace ELETRICTEL.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,TypesId,StatusId,CompanyId,Location,ProjectKM,ProjectPostes,ProjectART,ProjectStreetART,EngineersId,RCommercialId,RResponsibleId,Protocol,ProtocolTime,ApprovedTime,CreateTime,ChangeTime")] Projects projects)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,TypesId,StatusId,CompanyId,Location,CreateTime")] Projects projects)
         {
             if (id != projects.Id)
             {
@@ -125,7 +112,6 @@ namespace ELETRICTEL.Controllers
             {
                 try
                 {
-                    projects.ChangeTime = DateTime.Now;
                     _context.Update(projects);
                     await _context.SaveChangesAsync();
                 }
@@ -143,11 +129,8 @@ namespace ELETRICTEL.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CompanyId"] = new SelectList(_context.Company, "Id", "Razao", projects.CompanyId);
-            ViewData["RCommercialId"] = new SelectList(_context.RCommercial, "Id", "Name", projects.RCommercialId);
-            ViewData["RResponsibleId"] = new SelectList(_context.RResponsible, "Id", "Name", projects.RResponsibleId);
             ViewData["StatusId"] = new SelectList(_context.Status, "Id", "Name", projects.StatusId);
             ViewData["TypesId"] = new SelectList(_context.Types, "Id", "Name", projects.TypesId);
-            ViewData["EngineersId"] = new SelectList(_context.Types, "Id", "Name", projects.TypesId);
             return View(projects);
         }
 
@@ -161,8 +144,6 @@ namespace ELETRICTEL.Controllers
 
             var projects = await _context.Projects
                 .Include(p => p.Company)
-                .Include(p => p.RCommercial)
-                .Include(p => p.RResponsible)
                 .Include(p => p.Status)
                 .Include(p => p.Types)
                 .FirstOrDefaultAsync(m => m.Id == id);

@@ -99,7 +99,6 @@ namespace ELETRICTEL.Controllers
             {
                 try
                 {
-                    types.ChangeTime = DateTime.Now;
                     _context.Types.Update(types);
                     await _context.SaveChangesAsync();
                 }

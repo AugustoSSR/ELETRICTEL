@@ -7,11 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ELETRICTEL.Data;
 using ELETRICTEL.Models;
-using ELETRICTEL.Filters;
 
 namespace ELETRICTEL.Controllers
 {
-    [PaginaParaUsuarioLogado]
     public class CompanyController : Controller
     {
         private readonly ELETRICTELContext _context;
@@ -24,8 +22,7 @@ namespace ELETRICTEL.Controllers
         // GET: Company
         public async Task<IActionResult> Index()
         {
-            var eLETRICTELContext = _context.Company.Include(c => c.UserClients);
-            return View(await eLETRICTELContext.ToListAsync());
+              return View(await _context.Company.ToListAsync());
         }
 
         // GET: Company/Details/5
@@ -37,7 +34,6 @@ namespace ELETRICTEL.Controllers
             }
 
             var company = await _context.Company
-                .Include(c => c.UserClients)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (company == null)
             {
@@ -50,7 +46,6 @@ namespace ELETRICTEL.Controllers
         // GET: Company/Create
         public IActionResult Create()
         {
-            ViewData["UserClientsId"] = new SelectList(_context.Set<UserClients>(), "Id", "Id");
             return View();
         }
 
@@ -59,7 +54,7 @@ namespace ELETRICTEL.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Razao,Fantasia,CNPJ,Street,StreetNumber,StreetCep,StreetState,StreetCity,UserClientsId,CreateTime,ChangeTime")] Company company)
+        public async Task<IActionResult> Create([Bind("Id,Razao,Fantasia,CNPJ,Street,StreetNumber,StreetCep,StreetState,StreetCity,CreateTime")] Company company)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +62,6 @@ namespace ELETRICTEL.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserClientsId"] = new SelectList(_context.Set<UserClients>(), "Id", "Id", company.UserClientsId);
             return View(company);
         }
 
@@ -84,7 +78,6 @@ namespace ELETRICTEL.Controllers
             {
                 return NotFound();
             }
-            ViewData["UserClientsId"] = new SelectList(_context.Set<UserClients>(), "Id", "Id", company.UserClientsId);
             return View(company);
         }
 
@@ -93,7 +86,7 @@ namespace ELETRICTEL.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Razao,Fantasia,CNPJ,Street,StreetNumber,StreetCep,StreetState,StreetCity,UserClientsId,CreateTime,ChangeTime")] Company company)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Razao,Fantasia,CNPJ,Street,StreetNumber,StreetCep,StreetState,StreetCity,CreateTime")] Company company)
         {
             if (id != company.Id)
             {
@@ -120,7 +113,6 @@ namespace ELETRICTEL.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserClientsId"] = new SelectList(_context.Set<UserClients>(), "Id", "Id", company.UserClientsId);
             return View(company);
         }
 
@@ -133,7 +125,6 @@ namespace ELETRICTEL.Controllers
             }
 
             var company = await _context.Company
-                .Include(c => c.UserClients)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (company == null)
             {

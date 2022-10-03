@@ -11,9 +11,7 @@ namespace ELETRICTEL.Models
         public bool Active { get; set; }
         public ICollection<UsersViewModel> UserViewModel { get; set; } = new List<UsersViewModel>();
         [DisplayName("Create Date")]
-        public DateTime CreateTime { get; set; }
-        [DisplayName("Change Date")]
-        public DateTime? ChangeTime { get; set; }
+        public DateTime CreateTime { get; set; } = DateTime.Now;
 
 
     }

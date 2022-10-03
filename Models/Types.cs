@@ -13,8 +13,6 @@ namespace ELETRICTEL.Models
         public ICollection<Projects> Projects { get; set; } = new List<Projects>();
         [DisplayName("Create Date")]
         public DateTime CreateTime { get; set; } = DateTime.Now;
-        [DisplayName("Change Date")]
-        public DateTime? ChangeTime { get; set; }
 
     }
 }

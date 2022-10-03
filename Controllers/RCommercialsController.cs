@@ -56,7 +56,7 @@ namespace ELETRICTEL.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Role,Mail,Phone,CPF,RG,CreateTime,ChangeTime")] RCommercial rCommercial)
+        public async Task<IActionResult> Create([Bind("Id,Name,Role,Mail,Phone,CPF,RG,CreateTime")] RCommercial rCommercial)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace ELETRICTEL.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Role,Mail,Phone,CPF,RG,CreateTime,ChangeTime")] RCommercial rCommercial)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Role,Mail,Phone,CPF,RG,CreateTime")] RCommercial rCommercial)
         {
             if (id != rCommercial.Id)
             {

@@ -9,8 +9,7 @@
         public string Phone { get; set; }
         public string CPF { get; set; }
         public string RG { get; set; }
-        public ICollection<Projects> Projects { get; set; } = new List<Projects>();
-        public DateTime CreateTime { get; set; }
-        public DateTime? ChangeTime { get; set; }
+        public DateTime CreateTime { get; set; } = DateTime.Now;
+        public ICollection<ProjectDetails> ProjectDetails { get; set; } = new List<ProjectDetails>();
     }
 }

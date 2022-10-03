@@ -31,14 +31,11 @@ namespace ELETRICTEL.Models
         [DisplayName("Cidade")]
         [Required(ErrorMessage = "Por favor coloque o nome da Cidade")]
         public string StreetCity { get; set; }
-        [DisplayName("Usuario")]
-        [Required(ErrorMessage = "Por favor selecione o usuario do cliente.")]
-        public int? UserClientsId { get; set; }
-        public UserClients? UserClients { get; set; }
-        public ICollection<Projects> Projects { get; set; } = new List<Projects>();
+        public bool Active { get; set; }
         [DisplayName("Data de Cadastro")]
-        public DateTime CreateTime { get; set; }
-        public DateTime? ChangeTime { get; set; }
+        public DateTime CreateTime { get; set; } = DateTime.Now;
+        public ICollection<Projects> Projects { get; set; } = new List<Projects>();
+        public ICollection<UserClients> UserClients { get; set; } = new List<UserClients>();
 
     }
 }

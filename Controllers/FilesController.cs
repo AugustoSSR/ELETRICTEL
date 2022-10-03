@@ -10,85 +10,94 @@ using ELETRICTEL.Models;
 
 namespace ELETRICTEL.Controllers
 {
-    public class RolesController : Controller
+    public class FilesController : Controller
     {
         private readonly ELETRICTELContext _context;
 
-        public RolesController(ELETRICTELContext context)
+        public FilesController(ELETRICTELContext context)
         {
             _context = context;
         }
 
-        // GET: Roles
+        // GET: Files
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Roles.ToListAsync());
+            var eLETRICTELContext = _context.Files.Include(f => f.Company).Include(f => f.Projects);
+            return View(await eLETRICTELContext.ToListAsync());
         }
 
-        // GET: Roles/Details/5
+        // GET: Files/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Roles == null)
+            if (id == null || _context.Files == null)
             {
                 return NotFound();
             }
 
-            var roles = await _context.Roles
+            var files = await _context.Files
+                .Include(f => f.Company)
+                .Include(f => f.Projects)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (roles == null)
+            if (files == null)
             {
                 return NotFound();
             }
 
-            return View(roles);
+            return View(files);
         }
 
-        // GET: Roles/Create
+        // GET: Files/Create
         public IActionResult Create()
         {
+            ViewData["CompanyId"] = new SelectList(_context.Company, "Id", "CNPJ");
+            ViewData["ProjectsId"] = new SelectList(_context.Projects, "Id", "Location");
             return View();
         }
 
-        // POST: Roles/Create
+        // POST: Files/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Active,CreateTime,ChangeTime")] Roles roles)
+        public async Task<IActionResult> Create([Bind("Id,ProjectsId,Book,Box,CompanyId,CreateTime")] Files files)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(roles);
+                _context.Add(files);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(roles);
+            ViewData["CompanyId"] = new SelectList(_context.Company, "Id", "CNPJ", files.CompanyId);
+            ViewData["ProjectsId"] = new SelectList(_context.Projects, "Id", "Location", files.ProjectsId);
+            return View(files);
         }
 
-        // GET: Roles/Edit/5
+        // GET: Files/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Roles == null)
+            if (id == null || _context.Files == null)
             {
                 return NotFound();
             }
 
-            var roles = await _context.Roles.FindAsync(id);
-            if (roles == null)
+            var files = await _context.Files.FindAsync(id);
+            if (files == null)
             {
                 return NotFound();
             }
-            return View(roles);
+            ViewData["CompanyId"] = new SelectList(_context.Company, "Id", "CNPJ", files.CompanyId);
+            ViewData["ProjectsId"] = new SelectList(_context.Projects, "Id", "Location", files.ProjectsId);
+            return View(files);
         }
 
-        // POST: Roles/Edit/5
+        // POST: Files/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Active,CreateTime,ChangeTime")] Roles roles)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ProjectsId,Book,Box,CompanyId,CreateTime")] Files files)
         {
-            if (id != roles.Id)
+            if (id != files.Id)
             {
                 return NotFound();
             }
@@ -97,12 +106,12 @@ namespace ELETRICTEL.Controllers
             {
                 try
                 {
-                    _context.Update(roles);
+                    _context.Update(files);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!RolesExists(roles.Id))
+                    if (!FilesExists(files.Id))
                     {
                         return NotFound();
                     }
@@ -113,49 +122,53 @@ namespace ELETRICTEL.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(roles);
+            ViewData["CompanyId"] = new SelectList(_context.Company, "Id", "CNPJ", files.CompanyId);
+            ViewData["ProjectsId"] = new SelectList(_context.Projects, "Id", "Location", files.ProjectsId);
+            return View(files);
         }
 
-        // GET: Roles/Delete/5
+        // GET: Files/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Roles == null)
+            if (id == null || _context.Files == null)
             {
                 return NotFound();
             }
 
-            var roles = await _context.Roles
+            var files = await _context.Files
+                .Include(f => f.Company)
+                .Include(f => f.Projects)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (roles == null)
+            if (files == null)
             {
                 return NotFound();
             }
 
-            return View(roles);
+            return View(files);
         }
 
-        // POST: Roles/Delete/5
+        // POST: Files/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Roles == null)
+            if (_context.Files == null)
             {
-                return Problem("Entity set 'ELETRICTELContext.Roles'  is null.");
+                return Problem("Entity set 'ELETRICTELContext.Files'  is null.");
             }
-            var roles = await _context.Roles.FindAsync(id);
-            if (roles != null)
+            var files = await _context.Files.FindAsync(id);
+            if (files != null)
             {
-                _context.Roles.Remove(roles);
+                _context.Files.Remove(files);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool RolesExists(int id)
+        private bool FilesExists(int id)
         {
-          return _context.Roles.Any(e => e.Id == id);
+          return _context.Files.Any(e => e.Id == id);
         }
     }
 }

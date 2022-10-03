@@ -25,34 +25,11 @@ namespace ELETRICTEL.Models
         [DisplayName("Localidade")]
         [Required(ErrorMessage = "Por favor, coloque o nome da localidade do projeto.")]
         public string Location { get; set; }
-
-        public string? ProjectKM { get; set; }
-        public string? ProjectPostes { get; set; }
-        public string? ProjectART { get; set; }
-        public string? ProjectStreetART { get; set; }
-        public Engineers Engineers { get; set; }
-        public int? EngineersId { get; set; }
-        public RCommercial RCommercial { get; set; }
-        public int? RCommercialId { get; set; }
-        public RResponsible RResponsible { get; set; }
-        public int? RResponsibleId { get; set; }
-
-        [DisplayName("N° Protocolo")]
-        public string? Protocol { get; set; }
-        [DisplayName("Data de Protocolo")]
-        public DateTime? ProtocolTime { get; set; }
-        [DisplayName("Data de Aprovação")]
-        public DateTime? ApprovedTime { get; set; }
-
-
         [DisplayName("Create Date")]
-        public DateTime CreateTime { get; set; }
-        [DisplayName("Change Date")]
-        public DateTime? ChangeTime { get; set; }
+        public DateTime? CreateTime { get; set; } = DateTime.Now;
 
-        public Projects()
-        {
-        }
+
+        public ICollection<ProjectDetails> ProjectDetails { get; set; } = new List<ProjectDetails>();
 
     }
 }

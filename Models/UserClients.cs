@@ -2,7 +2,6 @@
 using ELETRICTEL.Helper;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using Xunit.Abstractions;
 
 namespace ELETRICTEL.Models
 {
@@ -31,7 +30,7 @@ namespace ELETRICTEL.Models
 
         [Required(ErrorMessage = "Informe o cargo do usuario")]
         public Company Company { get; set; }
-        public int? CompanyId { get; set; }
+        public int CompanyId { get; set; } = 0;
         [Required(ErrorMessage = "Informe o status do usuario")]
         public bool Actived { get; set; } = false;
         [DisplayName("Create Date")]

@@ -30,12 +30,12 @@ namespace ELETRICTEL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
                     b.Property<string>("CNPJ")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ChangeTime")
-                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
@@ -68,13 +68,7 @@ namespace ELETRICTEL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserClientsId")
-                        .IsRequired()
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserClientsId");
 
                     b.ToTable("Company");
                 });
@@ -92,9 +86,6 @@ namespace ELETRICTEL.Migrations
 
                     b.Property<int>("CREA")
                         .HasColumnType("int");
-
-                    b.Property<DateTime?>("ChangeTime")
-                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
@@ -116,7 +107,39 @@ namespace ELETRICTEL.Migrations
                     b.ToTable("Engineers");
                 });
 
-            modelBuilder.Entity("ELETRICTEL.Models.Projects", b =>
+            modelBuilder.Entity("ELETRICTEL.Models.Files", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Book")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Box")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CompanyId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProjectsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("ProjectsId");
+
+                    b.ToTable("Files");
+                });
+
+            modelBuilder.Entity("ELETRICTEL.Models.ProjectDetails", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -127,25 +150,11 @@ namespace ELETRICTEL.Migrations
                     b.Property<DateTime?>("ApprovedTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("ChangeTime")
+                    b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CompanyId")
+                    b.Property<int>("EngineersId")
                         .HasColumnType("int");
-
-                    b.Property<DateTime?>("CreateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("EngineersId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Location")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProjectART")
                         .HasColumnType("nvarchar(max)");
@@ -159,17 +168,55 @@ namespace ELETRICTEL.Migrations
                     b.Property<string>("ProjectStreetART")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ProjectsId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Protocol")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("ProtocolTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("RCommercialId")
+                    b.Property<int>("RCommercialId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("RResponsibleId")
+                    b.Property<int>("RResponsibleId")
                         .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EngineersId");
+
+                    b.HasIndex("ProjectsId");
+
+                    b.HasIndex("RCommercialId");
+
+                    b.HasIndex("RResponsibleId");
+
+                    b.ToTable("ProjectDetails");
+                });
+
+            modelBuilder.Entity("ELETRICTEL.Models.Projects", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("StatusId")
                         .HasColumnType("int");
@@ -180,12 +227,6 @@ namespace ELETRICTEL.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CompanyId");
-
-                    b.HasIndex("EngineersId");
-
-                    b.HasIndex("RCommercialId");
-
-                    b.HasIndex("RResponsibleId");
 
                     b.HasIndex("StatusId");
 
@@ -204,9 +245,6 @@ namespace ELETRICTEL.Migrations
 
                     b.Property<string>("CPF")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ChangeTime")
-                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
@@ -242,9 +280,6 @@ namespace ELETRICTEL.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("ChangeTime")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
 
@@ -266,9 +301,6 @@ namespace ELETRICTEL.Migrations
 
                     b.Property<string>("CPF")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ChangeTime")
-                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
@@ -301,9 +333,6 @@ namespace ELETRICTEL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime?>("ChangeTime")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
 
@@ -322,9 +351,6 @@ namespace ELETRICTEL.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime?>("ChangeTime")
-                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
@@ -346,18 +372,45 @@ namespace ELETRICTEL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<bool>("Actived")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("ChangeTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("cLogin")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("cMail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("cName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("cPassword")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("cPhone")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserClients");
+                    b.HasIndex("CompanyId");
+
+                    b.ToTable("UsersC");
                 });
 
             modelBuilder.Entity("ELETRICTEL.Models.ViewModels.UsersViewModel", b =>
@@ -410,15 +463,56 @@ namespace ELETRICTEL.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("ELETRICTEL.Models.Company", b =>
+            modelBuilder.Entity("ELETRICTEL.Models.Files", b =>
                 {
-                    b.HasOne("ELETRICTEL.Models.UserClients", "UserClients")
+                    b.HasOne("ELETRICTEL.Models.Company", "Company")
                         .WithMany()
-                        .HasForeignKey("UserClientsId")
+                        .HasForeignKey("CompanyId");
+
+                    b.HasOne("ELETRICTEL.Models.Projects", "Projects")
+                        .WithMany()
+                        .HasForeignKey("ProjectsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("UserClients");
+                    b.Navigation("Company");
+
+                    b.Navigation("Projects");
+                });
+
+            modelBuilder.Entity("ELETRICTEL.Models.ProjectDetails", b =>
+                {
+                    b.HasOne("ELETRICTEL.Models.Engineers", "Engineers")
+                        .WithMany("ProjectDetails")
+                        .HasForeignKey("EngineersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ELETRICTEL.Models.Projects", "Projects")
+                        .WithMany("ProjectDetails")
+                        .HasForeignKey("ProjectsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ELETRICTEL.Models.RCommercial", "RCommercial")
+                        .WithMany("ProjectDetails")
+                        .HasForeignKey("RCommercialId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ELETRICTEL.Models.RResponsible", "RResponsible")
+                        .WithMany("ProjectDetails")
+                        .HasForeignKey("RResponsibleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Engineers");
+
+                    b.Navigation("Projects");
+
+                    b.Navigation("RCommercial");
+
+                    b.Navigation("RResponsible");
                 });
 
             modelBuilder.Entity("ELETRICTEL.Models.Projects", b =>
@@ -428,18 +522,6 @@ namespace ELETRICTEL.Migrations
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("ELETRICTEL.Models.Engineers", "Engineers")
-                        .WithMany("Projects")
-                        .HasForeignKey("EngineersId");
-
-                    b.HasOne("ELETRICTEL.Models.RCommercial", "RCommercial")
-                        .WithMany("Projects")
-                        .HasForeignKey("RCommercialId");
-
-                    b.HasOne("ELETRICTEL.Models.RResponsible", "RResponsible")
-                        .WithMany("Projects")
-                        .HasForeignKey("RResponsibleId");
 
                     b.HasOne("ELETRICTEL.Models.Status", "Status")
                         .WithMany("Projects")
@@ -455,15 +537,20 @@ namespace ELETRICTEL.Migrations
 
                     b.Navigation("Company");
 
-                    b.Navigation("Engineers");
-
-                    b.Navigation("RCommercial");
-
-                    b.Navigation("RResponsible");
-
                     b.Navigation("Status");
 
                     b.Navigation("Types");
+                });
+
+            modelBuilder.Entity("ELETRICTEL.Models.UserClients", b =>
+                {
+                    b.HasOne("ELETRICTEL.Models.Company", "Company")
+                        .WithMany("UserClients")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Company");
                 });
 
             modelBuilder.Entity("ELETRICTEL.Models.ViewModels.UsersViewModel", b =>
@@ -480,16 +567,23 @@ namespace ELETRICTEL.Migrations
             modelBuilder.Entity("ELETRICTEL.Models.Company", b =>
                 {
                     b.Navigation("Projects");
+
+                    b.Navigation("UserClients");
                 });
 
             modelBuilder.Entity("ELETRICTEL.Models.Engineers", b =>
                 {
-                    b.Navigation("Projects");
+                    b.Navigation("ProjectDetails");
+                });
+
+            modelBuilder.Entity("ELETRICTEL.Models.Projects", b =>
+                {
+                    b.Navigation("ProjectDetails");
                 });
 
             modelBuilder.Entity("ELETRICTEL.Models.RCommercial", b =>
                 {
-                    b.Navigation("Projects");
+                    b.Navigation("ProjectDetails");
                 });
 
             modelBuilder.Entity("ELETRICTEL.Models.Roles", b =>
@@ -499,7 +593,7 @@ namespace ELETRICTEL.Migrations
 
             modelBuilder.Entity("ELETRICTEL.Models.RResponsible", b =>
                 {
-                    b.Navigation("Projects");
+                    b.Navigation("ProjectDetails");
                 });
 
             modelBuilder.Entity("ELETRICTEL.Models.Status", b =>

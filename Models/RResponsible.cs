@@ -11,10 +11,8 @@ namespace ELETRICTEL.Models
         public string Phone { get; set; }
         public string CPF { get; set; }
         public string RG { get; set; }
-        public ICollection<Projects> Projects { get; set; } = new List<Projects>();
+        public ICollection<ProjectDetails> ProjectDetails { get; set; } = new List<ProjectDetails>();
         [DisplayName("Create Date")]
-        public DateTime CreateTime { get; set; }
-        [DisplayName("Change Date")]
-        public DateTime? ChangeTime { get; set; }
+        public DateTime CreateTime { get; set; } = DateTime.Now;
     }
 }
