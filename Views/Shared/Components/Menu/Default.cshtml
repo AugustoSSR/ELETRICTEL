@@ -1,4 +1,4 @@
-﻿@model ELETRICTEL.Models.ViewModels.UsersViewModel
+﻿@model UsersViewModel
 
 <!-- app-Header -->
 <div class="app-header header sticky">
@@ -136,10 +136,10 @@
                                 <span class="sub-side-menu__label">Clientes</span><i class="sub-angle fe fe-chevron-right"></i>
                             </a>
                             <ul class="sub-slide-menu">
-                                <li><a asp-controller="Company" asp-action="Index" class="sub-slide-item"> Empresas</a></li>
-                                <li><a asp-controller="Engineers" asp-action="Index" class="sub-slide-item"> Engenheiros</a></li>
-                                <li><a asp-controller="RCommercials" asp-action="Index" class="sub-slide-item"> Res. Comercial</a></li>
-                                <li><a asp-controller="RResponsibles" asp-action="Index" class="sub-slide-item"> Res. Empresa</a></li>
+                                <li><a asp-controller="Company" asp-action="Relatorios" class="sub-slide-item"> Empresas</a></li>
+                                <li><a asp-controller="Engineers" asp-action="Relatorios" class="sub-slide-item"> Engenheiros</a></li>
+                                <li><a asp-controller="RCommercials" asp-action="Relatorios" class="sub-slide-item"> Res. Comercial</a></li>
+                                <li><a asp-controller="RResponsibles" asp-action="Relatorios" class="sub-slide-item"> Res. Empresa</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -161,11 +161,11 @@
                                 <span class="sub-side-menu__label">Clientes</span><i class="sub-angle fe fe-chevron-right"></i>
                             </a>
                             <ul class="sub-slide-menu">
-                                <li><a asp-controller="" asp-action="" class="sub-slide-item"> Usuarios</a></li>
-                                <li><a asp-controller="" asp-action="" class="sub-slide-item"> Empresas</a></li>
-                                <li><a asp-controller="" asp-action="" class="sub-slide-item"> Engenheiros</a></li>
-                                <li><a asp-controller="" asp-action="" class="sub-slide-item"> Res. Comercial</a></li>
-                                <li><a asp-controller="" asp-action="" class="sub-slide-item"> Res. Empresa</a></li>
+                                <li><a asp-controller="Users" asp-action="Index" class="sub-slide-item"> Usuarios</a></li>
+                                <li><a asp-controller="Company" asp-action="Index" class="sub-slide-item"> Empresas</a></li>
+                                <li><a asp-controller="Engineers" asp-action="Index" class="sub-slide-item"> Engenheiros</a></li>
+                                <li><a asp-controller="RCommercials" asp-action="Index" class="sub-slide-item"> Res. Comercial</a></li>
+                                <li><a asp-controller="RResponsibles" asp-action="Index" class="sub-slide-item"> Res. Empresa</a></li>
                             </ul>
                         </li>
                     </ul>

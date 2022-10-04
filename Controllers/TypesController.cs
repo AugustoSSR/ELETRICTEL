@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ELETRICTEL.Data;
-using ELETRICTEL.Models;
 using ELETRICTEL.Filters;
+using ELETRICTEL.Models;
 
 namespace ELETRICTEL.Controllers
 {
@@ -60,10 +60,12 @@ namespace ELETRICTEL.Controllers
         {
             if (ModelState.IsValid)
             {
+                TempData["MensagemSucesso"] = $"O tipos {types.Name} foi criado com sucesso.";
                 _context.Types.Add(types);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            TempData["MensagemErro"] = "Aconteceu alguma coisa, fale com o administrador.";
             return View(types);
         }
 
@@ -99,6 +101,7 @@ namespace ELETRICTEL.Controllers
             {
                 try
                 {
+                    TempData["MensagemSucesso"] = $"O tipos {types.Name} foi editado com sucesso.";
                     _context.Types.Update(types);
                     await _context.SaveChangesAsync();
                 }
@@ -115,6 +118,7 @@ namespace ELETRICTEL.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            TempData["MensagemErro"] = "Aconteceu alguma coisa, fale com o administrador.";
             return View(types);
         }
 
@@ -150,7 +154,8 @@ namespace ELETRICTEL.Controllers
             {
                 _context.Types.Remove(types);
             }
-            
+
+            TempData["MensagemSucesso"] = "O engenheiro foi deletada com sucesso.";
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

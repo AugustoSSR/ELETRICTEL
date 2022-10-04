@@ -1,12 +1,13 @@
-﻿using System.ComponentModel;
+﻿
 
 namespace ELETRICTEL.Models
 {
     public class ProjectDetails
     {
         public int Id { get; set; }
-        public Projects Projects { get; set; }
-        public int ProjectsId { get; set; }
+        public int ApplicationId { get; set; }
+        public virtual Projects Projects { get; set; }
+        public string ProjectName { get; set; }
         public string ProjectKM { get; set; }
         public string ProjectPostes { get; set; }
         public string ProjectART { get; set; }

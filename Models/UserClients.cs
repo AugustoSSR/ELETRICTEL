@@ -1,5 +1,4 @@
-﻿
-using ELETRICTEL.Helper;
+﻿using ELETRICTEL.Helper;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 

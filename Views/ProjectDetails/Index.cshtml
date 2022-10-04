@@ -1,0 +1,101 @@
+﻿@model IEnumerable<ELETRICTEL.Models.ProjectDetails>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Projects)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectKM)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectPostes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectART)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectStreetART)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Engineers)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RCommercial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RResponsible)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Protocol)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProtocolTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApprovedTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Projects.Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectKM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectPostes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectART)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectStreetART)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Engineers.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RCommercial.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RResponsible.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Protocol)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProtocolTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApprovedTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateDate)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

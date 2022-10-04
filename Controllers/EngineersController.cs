@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ELETRICTEL.Data;
-using ELETRICTEL.Models;
 using ELETRICTEL.Filters;
+using ELETRICTEL.Models;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace ELETRICTEL.Controllers
 {
@@ -62,8 +63,10 @@ namespace ELETRICTEL.Controllers
             {
                 _context.Add(engineers);
                 await _context.SaveChangesAsync();
+                TempData["MensagemSucesso"] = $"O engenheiro {engineers.Name} foi criada com sucesso.";
                 return RedirectToAction(nameof(Index));
             }
+            TempData["MensagemErro"] = "Aconteceu alguma coisa, fale com o administrador.";
             return View(engineers);
         }
 
@@ -99,6 +102,7 @@ namespace ELETRICTEL.Controllers
             {
                 try
                 {
+                    TempData["MensagemSucesso"] = $"O engenheiro {engineers.Name} foi editada com sucesso.";
                     _context.Update(engineers);
                     await _context.SaveChangesAsync();
                 }
@@ -115,6 +119,7 @@ namespace ELETRICTEL.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            TempData["MensagemErro"] = "Aconteceu alguma coisa, tente novamente ou fale com o administrador.";
             return View(engineers);
         }
 
@@ -152,6 +157,7 @@ namespace ELETRICTEL.Controllers
             }
             
             await _context.SaveChangesAsync();
+            TempData["MensagemSucesso"] = "O engenheiro foi deletada com sucesso.";
             return RedirectToAction(nameof(Index));
         }
 

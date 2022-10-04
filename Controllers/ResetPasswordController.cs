@@ -1,6 +1,6 @@
 ﻿using ELETRICTEL.Filters;
 using ELETRICTEL.Helper;
-using ELETRICTEL.Models.ViewModels;
+using ELETRICTEL.Models;
 using ELETRICTEL.Repository;
 using Microsoft.AspNetCore.Mvc;
 

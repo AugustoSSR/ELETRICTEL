@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ELETRICTEL.Models.ViewModels
+namespace ELETRICTEL.Models
 {
     public class LoginViewModel
     {

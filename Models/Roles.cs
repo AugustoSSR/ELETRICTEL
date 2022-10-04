@@ -1,6 +1,4 @@
-﻿
-using ELETRICTEL.Models.ViewModels;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace ELETRICTEL.Models
 {

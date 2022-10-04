@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ELETRICTEL.Data;
 using ELETRICTEL.Models;
+using ELETRICTEL.Filters;
 
 namespace ELETRICTEL.Controllers
 {
+    [PaginaParaUsuarioLogado]
     public class CompanyController : Controller
     {
         private readonly ELETRICTELContext _context;
@@ -60,8 +62,10 @@ namespace ELETRICTEL.Controllers
             {
                 _context.Add(company);
                 await _context.SaveChangesAsync();
+                TempData["MensagemSucesso"] = $"A empresa {company.Razao} foi criada com sucesso.";
                 return RedirectToAction(nameof(Index));
             }
+            TempData["MensagemErro"] = "Aconteceu alguma coisa, fale com o administrador.";
             return View(company);
         }
 
@@ -97,6 +101,7 @@ namespace ELETRICTEL.Controllers
             {
                 try
                 {
+                    TempData["MensagemSucesso"] = $"A empresa {company.Razao} foi editada com sucesso.";
                     _context.Update(company);
                     await _context.SaveChangesAsync();
                 }
@@ -113,6 +118,7 @@ namespace ELETRICTEL.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            TempData["MensagemErro"] = "Aconteceu alguma coisa, tente novamente ou fale com o administrador.";
             return View(company);
         }
 
@@ -150,6 +156,7 @@ namespace ELETRICTEL.Controllers
             }
             
             await _context.SaveChangesAsync();
+            TempData["MensagemSucesso"] = "A empresa foi deletada com sucesso.";
             return RedirectToAction(nameof(Index));
         }
 

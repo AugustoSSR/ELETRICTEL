@@ -7,12 +7,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ELETRICTEL.Data;
 using ELETRICTEL.Models;
+using ELETRICTEL.Filters;
 
 namespace ELETRICTEL.Controllers
 {
+    [PaginaParaUsuarioLogado]
     public class ProjectsController : Controller
     {
-
         private readonly ELETRICTELContext _context;
 
         public ProjectsController(ELETRICTELContext context)
@@ -23,8 +24,11 @@ namespace ELETRICTEL.Controllers
         // GET: Projects
         public async Task<IActionResult> Index()
         {
-            var eLETRICTELContext = _context.Projects.Include(p => p.Company).Include(p => p.Status).Include(p => p.Types);
-            return View(await eLETRICTELContext.ToListAsync());
+            var includes = _context.Projects
+                .Include(p => p.Company)
+                .Include(p => p.Status)
+                .Include(p => p.Types);
+            return View(await includes.ToListAsync());
         }
 
         // GET: Projects/Details/5
@@ -62,18 +66,19 @@ namespace ELETRICTEL.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,TypesId,StatusId,CompanyId,Location")] Projects projects)
+        public async Task<IActionResult> Create([Bind("Id,Name,TypesId,StatusId,CompanyId,Location,CreateTime")] Projects projects)
         {
             if (ModelState.IsValid)
             {
-                projects.CreateTime = DateTime.Now;
                 _context.Add(projects);
+                TempData["MensagemSucesso"] = $"O projeto {projects.Name} foi criada com sucesso.";
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CompanyId"] = new SelectList(_context.Company, "Id", "Razao", projects.CompanyId);
             ViewData["StatusId"] = new SelectList(_context.Status, "Id", "Name", projects.StatusId);
             ViewData["TypesId"] = new SelectList(_context.Types, "Id", "Name", projects.TypesId);
+            TempData["MensagemErro"] = "Aconteceu alguma coisa, fale com o administrador.";
             return View(projects);
         }
 
@@ -112,6 +117,7 @@ namespace ELETRICTEL.Controllers
             {
                 try
                 {
+                    TempData["MensagemSucesso"] = $"O projeto {projects.Name} foi editado com sucesso.";
                     _context.Update(projects);
                     await _context.SaveChangesAsync();
                 }
@@ -131,6 +137,7 @@ namespace ELETRICTEL.Controllers
             ViewData["CompanyId"] = new SelectList(_context.Company, "Id", "Razao", projects.CompanyId);
             ViewData["StatusId"] = new SelectList(_context.Status, "Id", "Name", projects.StatusId);
             ViewData["TypesId"] = new SelectList(_context.Types, "Id", "Name", projects.TypesId);
+            TempData["MensagemErro"] = "Aconteceu alguma coisa, fale com o administrador.";
             return View(projects);
         }
 
@@ -169,14 +176,15 @@ namespace ELETRICTEL.Controllers
             {
                 _context.Projects.Remove(projects);
             }
-            
+
+            TempData["MensagemSucesso"] = "O engenheiro foi deletada com sucesso.";
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ProjectsExists(int id)
         {
-          return _context.Projects.Any(e => e.Id == id);
+            return _context.Projects.Any(e => e.Id == id);
         }
     }
 }

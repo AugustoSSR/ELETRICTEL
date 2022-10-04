@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Engineers>
+﻿@model IEnumerable<ELETRICTEL.Models.Projects>
 
 @{
     ViewData["Title"] = "Index";
@@ -9,26 +9,23 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table" id="engenheirosTable">
+<table class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CREA)
+                @Html.DisplayNameFor(model => model.Types)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Mail)
+                @Html.DisplayNameFor(model => model.Status)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Phone)
+                @Html.DisplayNameFor(model => model.Company)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CPF)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RG)
+                @Html.DisplayNameFor(model => model.Location)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.CreateTime)
@@ -43,19 +40,16 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CREA)
+                @Html.DisplayFor(modelItem => item.Types.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Mail)
+                @Html.DisplayFor(modelItem => item.Status.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Phone)
+                @Html.DisplayFor(modelItem => item.Company.CNPJ)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CPF)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RG)
+                @Html.DisplayFor(modelItem => item.Location)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CreateTime)

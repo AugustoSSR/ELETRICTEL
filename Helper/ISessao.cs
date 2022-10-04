@@ -1,5 +1,5 @@
 ﻿
-using ELETRICTEL.Models.ViewModels;
+using ELETRICTEL.Models;
 
 namespace ELETRICTEL.Helper
 {

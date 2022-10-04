@@ -1,4 +1,4 @@
-﻿using ELETRICTEL.Models.ViewModels;
+﻿using ELETRICTEL.Models;
 using Newtonsoft.Json;
 
 namespace ELETRICTEL.Helper

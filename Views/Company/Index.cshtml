@@ -1,84 +1,94 @@
-﻿@model IEnumerable<ELETRICTEL.Models.Company>
+﻿@model IEnumerable<Company>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<!-- PAGE-HEADER -->
+<div class="page-header">
+    <h1 class="page-title">Data Table</h1>
+    <div>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Tables</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Data Table</li>
+        </ol>
+    </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Razao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Fantasia)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CNPJ)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Street)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StreetNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StreetCep)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StreetState)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StreetCity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreateTime)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Razao)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Fantasia)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CNPJ)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Street)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StreetNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StreetCep)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StreetState)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StreetCity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreateTime)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+</div>
+<!-- PAGE-HEADER END -->
+<!-- Row -->
+<div class="row row-sm">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <a class="btn btn-success text-lg-end" asp-action="Create"><i class="fa fa-plus"></i> &nbsp;Adicionar</a>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="file-datatable" class="table table-bordered text-nowrap key-buttons border-bottom">
+                        <thead>
+                            <tr>
+                                <th class="border-bottom-0">
+                                    @Html.DisplayNameFor(model => model.Razao)
+                                </th>
+                                <th class="border-bottom-0">
+                                    @Html.DisplayNameFor(model => model.CNPJ)
+                                </th>
+                                <th class="border-bottom-0">
+                                    @Html.DisplayNameFor(model => model.StreetCity)
+                                </th>
+                                <th class="border-bottom-0">
+                                    @Html.DisplayNameFor(model => model.CreateTime)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => item.Razao)
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => item.CNPJ)
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => item.StreetCity)
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => item.CreateTime)
+                                    </td>
+                                    <td class="text-end">
+                                        <div class="btn-group lg-right-end" role="group">
+                                            <a role="button" class="btn btn-light" asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-pencil"></i></a>
+                                            <a role="button" class="btn btn-warning" asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-info"></i></a>
+                                            <a role="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-trash"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Row -->
+@section Scripts {
+    <!-- DATA TABLE JS-->
+    <script src="~/plugins/datatable/js/jquery.dataTables.min.js"></script>
+    <script src="~/plugins/datatable/js/dataTables.bootstrap5.js"></script>
+    <script src="~/plugins/datatable/js/dataTables.buttons.min.js"></script>
+    <script src="~/plugins/datatable/js/buttons.bootstrap5.min.js"></script>
+    <script src="~/plugins/datatable/js/jszip.min.js"></script>
+    <script src="~/plugins/datatable/pdfmake/pdfmake.min.js"></script>
+    <script src="~/plugins/datatable/pdfmake/vfs_fonts.js"></script>
+    <script src="~/plugins/datatable/js/buttons.html5.min.js"></script>
+    <script src="~/plugins/datatable/js/buttons.print.min.js"></script>
+    <script src="~/plugins/datatable/js/buttons.colVis.min.js"></script>
+    <script src="~/plugins/datatable/dataTables.responsive.min.js"></script>
+    <script src="~/plugins/datatable/responsive.bootstrap5.min.js"></script>
+    <script src="~/js/table-data.js"></script>
+}

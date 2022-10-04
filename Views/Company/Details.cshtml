@@ -1,72 +1,75 @@
-﻿@model ELETRICTEL.Models.Company
+﻿@model Company
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>Company</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Razao)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Razao)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Fantasia)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Fantasia)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CNPJ)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CNPJ)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Street)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Street)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StreetNumber)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StreetNumber)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StreetCep)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StreetCep)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StreetState)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StreetState)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StreetCity)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StreetCity)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreateTime)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreateTime)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="container">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Detalhes do produto</h4>
+            </div>
+            <div class="modal-body">
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>@Html.DisplayNameFor(model => model.Razao)
+                    <dd>
+                        @Html.DisplayFor(model => model.Razao)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Fantasia)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Fantasia)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CNPJ)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CNPJ)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Street)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Street)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.StreetNumber)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.StreetNumber)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.StreetCep)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.StreetCep)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.StreetState)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.StreetState)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.StreetCity)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.StreetCity)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CreateTime)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CreateTime)
+                    </dd>
+                </dl>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
 </div>

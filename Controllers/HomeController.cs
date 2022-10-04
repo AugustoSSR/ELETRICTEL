@@ -1,5 +1,5 @@
 ﻿using ELETRICTEL.Filters;
-using ELETRICTEL.Models.ViewModels;
+using ELETRICTEL.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

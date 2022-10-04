@@ -1,4 +1,4 @@
-namespace ELETRICTEL.Models.ViewModels
+namespace ELETRICTEL.Models
 {
     public class ErrorViewModel
     {

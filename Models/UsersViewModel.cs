@@ -1,7 +1,7 @@
 ﻿using ELETRICTEL.Helper;
 using System.ComponentModel.DataAnnotations;
 
-namespace ELETRICTEL.Models.ViewModels
+namespace ELETRICTEL.Models
 {
     public class UsersViewModel
     {

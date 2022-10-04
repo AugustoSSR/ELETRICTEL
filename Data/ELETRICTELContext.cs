@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ELETRICTEL.Models;
-using ELETRICTEL.Models.ViewModels;
 
 namespace ELETRICTEL.Data
 {
@@ -21,7 +20,7 @@ namespace ELETRICTEL.Data
         public DbSet<UsersViewModel> Users { get; set; }
         public DbSet<UserClients> UsersC { get; set; }
         public DbSet<Roles> Roles { get; set; }
-        public DbSet<ELETRICTEL.Models.ProjectDetails> ProjectDetails { get; set; }
-        public DbSet<ELETRICTEL.Models.Files> Files { get; set; }
+        public DbSet<ProjectDetails> ProjectDetails { get; set; }
+        public DbSet<Files> Files { get; set; }
     }
 }

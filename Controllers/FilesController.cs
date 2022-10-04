@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ELETRICTEL.Data;
 using ELETRICTEL.Models;
+using ELETRICTEL.Filters;
 
 namespace ELETRICTEL.Controllers
 {
+    [PaginaParaUsuarioLogado]
     public class FilesController : Controller
     {
         private readonly ELETRICTELContext _context;
@@ -49,8 +51,8 @@ namespace ELETRICTEL.Controllers
         // GET: Files/Create
         public IActionResult Create()
         {
-            ViewData["CompanyId"] = new SelectList(_context.Company, "Id", "CNPJ");
-            ViewData["ProjectsId"] = new SelectList(_context.Projects, "Id", "Location");
+            ViewData["CompanyId"] = new SelectList(_context.Company, "Id", "Razao");
+            ViewData["ProjectsId"] = new SelectList(_context.Projects, "Id", "Name");
             return View();
         }
 
@@ -64,11 +66,13 @@ namespace ELETRICTEL.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(files);
+                TempData["MensagemSucesso"] = $"O arquivo {files.ProjectsId} foi criada com sucesso.";
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CompanyId"] = new SelectList(_context.Company, "Id", "CNPJ", files.CompanyId);
-            ViewData["ProjectsId"] = new SelectList(_context.Projects, "Id", "Location", files.ProjectsId);
+            ViewData["CompanyId"] = new SelectList(_context.Company, "Id", "Razao", files.CompanyId);
+            ViewData["ProjectsId"] = new SelectList(_context.Projects, "Id", "Name", files.ProjectsId);
+            TempData["MensagemErro"] = "Aconteceu alguma coisa, fale com o administrador.";
             return View(files);
         }
 
@@ -85,8 +89,8 @@ namespace ELETRICTEL.Controllers
             {
                 return NotFound();
             }
-            ViewData["CompanyId"] = new SelectList(_context.Company, "Id", "CNPJ", files.CompanyId);
-            ViewData["ProjectsId"] = new SelectList(_context.Projects, "Id", "Location", files.ProjectsId);
+            ViewData["CompanyId"] = new SelectList(_context.Company, "Id", "Razao", files.CompanyId);
+            ViewData["ProjectsId"] = new SelectList(_context.Projects, "Id", "Name", files.ProjectsId);
             return View(files);
         }
 
@@ -106,6 +110,7 @@ namespace ELETRICTEL.Controllers
             {
                 try
                 {
+                    TempData["MensagemSucesso"] = $"O arquivo {files.ProjectsId} foi criada com sucesso.";
                     _context.Update(files);
                     await _context.SaveChangesAsync();
                 }
@@ -122,8 +127,9 @@ namespace ELETRICTEL.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CompanyId"] = new SelectList(_context.Company, "Id", "CNPJ", files.CompanyId);
-            ViewData["ProjectsId"] = new SelectList(_context.Projects, "Id", "Location", files.ProjectsId);
+            ViewData["CompanyId"] = new SelectList(_context.Company, "Id", "Razao", files.CompanyId);
+            ViewData["ProjectsId"] = new SelectList(_context.Projects, "Id", "Name", files.ProjectsId);
+            TempData["MensagemErro"] = "Aconteceu alguma coisa, tente novamente ou fale com o administrador.";
             return View(files);
         }
 
@@ -161,7 +167,8 @@ namespace ELETRICTEL.Controllers
             {
                 _context.Files.Remove(files);
             }
-            
+
+            TempData["MensagemSucesso"] = "O engenheiro foi deletada com sucesso.";
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

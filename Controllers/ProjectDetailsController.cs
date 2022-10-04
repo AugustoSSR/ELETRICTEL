@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ELETRICTEL.Data;
 using ELETRICTEL.Models;
+using ELETRICTEL.Filters;
 
 namespace ELETRICTEL.Controllers
 {
+    [PaginaParaUsuarioLogado]
     public class ProjectDetailsController : Controller
     {
         private readonly ELETRICTELContext _context;
@@ -51,10 +53,10 @@ namespace ELETRICTEL.Controllers
         // GET: ProjectDetails/Create
         public IActionResult Create()
         {
-            ViewData["EngineersId"] = new SelectList(_context.Engineers, "Id", "Id");
-            ViewData["ProjectsId"] = new SelectList(_context.Projects, "Id", "Location");
-            ViewData["RCommercialId"] = new SelectList(_context.RCommercial, "Id", "Id");
-            ViewData["RResponsibleId"] = new SelectList(_context.RResponsible, "Id", "Id");
+            ViewData["EngineersId"] = new SelectList(_context.Engineers, "Id", "Name");
+            ViewData["ProjectsId"] = new SelectList(_context.Projects, "Id", "Name");
+            ViewData["RCommercialId"] = new SelectList(_context.RCommercial, "Id", "Name");
+            ViewData["RResponsibleId"] = new SelectList(_context.RResponsible, "Id", "Name");
             return View();
         }
 
@@ -68,13 +70,15 @@ namespace ELETRICTEL.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(projectDetails);
+                TempData["MensagemSucesso"] = $"O projeto {projectDetails.ProjectsId} foi criada com sucesso.";
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EngineersId"] = new SelectList(_context.Engineers, "Id", "Id", projectDetails.EngineersId);
-            ViewData["ProjectsId"] = new SelectList(_context.Projects, "Id", "Location", projectDetails.ProjectsId);
-            ViewData["RCommercialId"] = new SelectList(_context.RCommercial, "Id", "Id", projectDetails.RCommercialId);
-            ViewData["RResponsibleId"] = new SelectList(_context.RResponsible, "Id", "Id", projectDetails.RResponsibleId);
+            ViewData["EngineersId"] = new SelectList(_context.Engineers, "Id", "Name", projectDetails.EngineersId);
+            ViewData["ProjectsId"] = new SelectList(_context.Projects, "Id", "Name", projectDetails.ProjectsId);
+            ViewData["RCommercialId"] = new SelectList(_context.RCommercial, "Id", "Name", projectDetails.RCommercialId);
+            ViewData["RResponsibleId"] = new SelectList(_context.RResponsible, "Id", "Name", projectDetails.RResponsibleId);
+            TempData["MensagemErro"] = "Aconteceu alguma coisa, fale com o administrador.";
             return View(projectDetails);
         }
 
@@ -91,10 +95,10 @@ namespace ELETRICTEL.Controllers
             {
                 return NotFound();
             }
-            ViewData["EngineersId"] = new SelectList(_context.Engineers, "Id", "Id", projectDetails.EngineersId);
-            ViewData["ProjectsId"] = new SelectList(_context.Projects, "Id", "Location", projectDetails.ProjectsId);
-            ViewData["RCommercialId"] = new SelectList(_context.RCommercial, "Id", "Id", projectDetails.RCommercialId);
-            ViewData["RResponsibleId"] = new SelectList(_context.RResponsible, "Id", "Id", projectDetails.RResponsibleId);
+            ViewData["EngineersId"] = new SelectList(_context.Engineers, "Id", "Name", projectDetails.EngineersId);
+            ViewData["ProjectsId"] = new SelectList(_context.Projects, "Id", "Name", projectDetails.ProjectsId);
+            ViewData["RCommercialId"] = new SelectList(_context.RCommercial, "Id", "Name", projectDetails.RCommercialId);
+            ViewData["RResponsibleId"] = new SelectList(_context.RResponsible, "Id", "Name", projectDetails.RResponsibleId);
             return View(projectDetails);
         }
 
@@ -114,6 +118,7 @@ namespace ELETRICTEL.Controllers
             {
                 try
                 {
+                    TempData["MensagemSucesso"] = $"O projeto {projectDetails.ProjectsId} foi criada com sucesso.";
                     _context.Update(projectDetails);
                     await _context.SaveChangesAsync();
                 }
@@ -130,10 +135,11 @@ namespace ELETRICTEL.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EngineersId"] = new SelectList(_context.Engineers, "Id", "Id", projectDetails.EngineersId);
-            ViewData["ProjectsId"] = new SelectList(_context.Projects, "Id", "Location", projectDetails.ProjectsId);
-            ViewData["RCommercialId"] = new SelectList(_context.RCommercial, "Id", "Id", projectDetails.RCommercialId);
-            ViewData["RResponsibleId"] = new SelectList(_context.RResponsible, "Id", "Id", projectDetails.RResponsibleId);
+            ViewData["EngineersId"] = new SelectList(_context.Engineers, "Id", "Name", projectDetails.EngineersId);
+            ViewData["ProjectsId"] = new SelectList(_context.Projects, "Id", "Name", projectDetails.ProjectsId);
+            ViewData["RCommercialId"] = new SelectList(_context.RCommercial, "Id", "Name", projectDetails.RCommercialId);
+            ViewData["RResponsibleId"] = new SelectList(_context.RResponsible, "Id", "Name", projectDetails.RResponsibleId);
+            TempData["MensagemErro"] = "Aconteceu alguma coisa, tente novamente ou fale com o administrador.";
             return View(projectDetails);
         }
 
@@ -173,7 +179,8 @@ namespace ELETRICTEL.Controllers
             {
                 _context.ProjectDetails.Remove(projectDetails);
             }
-            
+
+            TempData["MensagemSucesso"] = "O engenheiro foi deletada com sucesso.";
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

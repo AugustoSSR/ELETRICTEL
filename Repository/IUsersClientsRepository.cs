@@ -1,5 +1,4 @@
-﻿
-using ELETRICTEL.Models;
+﻿using ELETRICTEL.Models;
 
 namespace ELETRICTEL.Repository
 {

@@ -1,5 +1,5 @@
 ﻿using ELETRICTEL.Data;
-using ELETRICTEL.Models.ViewModels;
+using ELETRICTEL.Models;
 
 namespace ELETRICTEL.Repository
 {
