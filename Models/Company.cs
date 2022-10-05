@@ -19,6 +19,8 @@ namespace ELETRICTEL.Models
         [DisplayName("CNPJ")]
         [Required(ErrorMessage = "Por favor coloque o CNPJ")]
         public string CNPJ { get; set; }
+        [DisplayName("Telefone")]
+        public string? Phone { get; set; }
 
         [DisplayName("Rua")]
         [Required(ErrorMessage = "Por favor coloque o nome da Rua")]
